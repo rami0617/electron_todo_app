@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import api from "../service/api";
 import styled from "styled-components";
 
@@ -6,6 +6,16 @@ export default function List() {
   const [list, setList] = useState([]);
   const [newValue, setNewValue] = useState("");
   const [date, setDate] = useState(null);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const result = await api.get("/");
+
+    setList(result.data.result);
+  };
 
   const handleList = (event) => {
     setNewValue(event.target.value);
