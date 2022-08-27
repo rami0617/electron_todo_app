@@ -30,6 +30,12 @@ export default function List() {
     setList(result.data.result);
   };
 
+  const handleUpdate = async (event) => {
+    const result = await api.patch("/", { id: event.target.value });
+
+    setList(result.data.result);
+  };
+
   return (
     <>
       <header>TODOLIST</header>
@@ -50,7 +56,9 @@ export default function List() {
             <button value={item._id} onClick={handleDelete}>
               삭제
             </button>
-            <button>완료</button>
+            <button value={item._id} onClick={handleUpdate}>
+              완료
+            </button>
           </div>
         ))}
       </ListContainer>
