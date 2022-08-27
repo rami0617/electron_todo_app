@@ -13,7 +13,6 @@ function createWindow() {
   });
 
   mainWindow.loadURL("http://localhost:3000");
-
   mainWindow.setResizable(true);
   mainWindow.on("closed", () => (mainWindow = null));
   mainWindow.focus();
@@ -30,7 +29,6 @@ app.on("window-all-closed", () => {
 
 app.on("activate", () => {
   if (mainWindow === null) {
-    console.log("ee");
     createWindow();
   }
 });
