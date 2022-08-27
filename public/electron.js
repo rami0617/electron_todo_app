@@ -17,6 +17,7 @@ function createWindow() {
   mainWindow.setResizable(true);
   mainWindow.on("closed", () => (mainWindow = null));
   mainWindow.focus();
+  mainWindow.webContents.openDevTools();
 }
 
 app.on("ready", createWindow);
@@ -29,6 +30,7 @@ app.on("window-all-closed", () => {
 
 app.on("activate", () => {
   if (mainWindow === null) {
+    console.log("ee");
     createWindow();
   }
 });
