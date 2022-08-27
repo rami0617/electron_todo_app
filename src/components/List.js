@@ -6,6 +6,7 @@ export default function List() {
   const [list, setList] = useState([]);
   const [newValue, setNewValue] = useState("");
   const [date, setDate] = useState(null);
+  const [keyword, setKeyword] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -46,6 +47,16 @@ export default function List() {
     setList(result.data.result);
   };
 
+  const handleSearch = async () => {
+    const result = await api.post("/search", { keyword });
+
+    setList(result.data.result);
+  };
+
+  const handleKeyword = (evnet) => {
+    setKeyword(evnet.target.value);
+  };
+
   return (
     <>
       <header>TODOLIST</header>
@@ -57,6 +68,10 @@ export default function List() {
         <div>끝나는 날짜</div>
         <div>상태</div>
       </ListItem>
+      <SearchItem>
+        <input onChange={handleKeyword} />
+        <button onClick={handleSearch}>검색</button>
+      </SearchItem>
       <ListContainer>
         {list.map((item) => (
           <div key={item._id}>
@@ -87,4 +102,8 @@ const ListItem = styled.div`
 
 const ListContainer = styled.div`
   background-color: aliceblue;
+`;
+
+const SearchItem = styled.div`
+  background-color: blanchedalmond;
 `;
