@@ -3,6 +3,7 @@ import api from "../service/api";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
+import TodoItem from "./TodoItem";
 
 export default function List() {
   const today = format(new Date(), "yyyy-MM-dd");
@@ -11,7 +12,6 @@ export default function List() {
   const [newValue, setNewValue] = useState("");
   const [date, setDate] = useState(null);
   const [keyword, setKeyword] = useState(null);
-  const [hasChange, setHasChange] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -43,20 +43,6 @@ export default function List() {
     setDate(event.target.value);
   };
 
-  const handleDelete = async (event) => {
-    const result = await api.delete("/", {
-      headers: { id: event.target.value },
-    });
-
-    setList(result.data.result);
-  };
-
-  const handleUpdate = async (event) => {
-    const result = await api.patch("/", { id: event.target.value });
-
-    setList(result.data.result);
-  };
-
   const handleSearch = async () => {
     const result = await api.post("/search", { keyword });
 
@@ -65,10 +51,6 @@ export default function List() {
 
   const handleKeyword = (evnet) => {
     setKeyword(evnet.target.value);
-  };
-
-  const handleTodo = () => {
-    setHasChange((prev) => !prev);
   };
 
   return (
@@ -93,34 +75,47 @@ export default function List() {
         </SearchItem>
         <ListItem>
           {list.map((item) => (
-            <div className="todo-item" key={item._id}>
-              {!hasChange ? (
-                <>
-                  <span className="todo-name">{item.name}</span>
-                  <span className="due-date">{item.dueDate}</span>
-                  <span className="status">{item.status}</span>
-                </>
-              ) : (
-                <>
-                  <input></input>
-                  <input type="date" min={today}></input>
-                  <button>수정완료</button>
-                </>
-              )}
-              <button
-                className="delete"
-                value={item._id}
-                onClick={handleDelete}
-              >
-                삭제
-              </button>
-              <button className="done" value={item._id} onClick={handleUpdate}>
-                완료
-              </button>
-              <button className="change-todo" onClick={handleTodo}>
-                수정
-              </button>
-            </div>
+            <TodoItem
+              item={item}
+              handleList={setList}
+              handleInsertList={handleInsertList}
+              newValue={newValue}
+              handleNewValue={setNewValue}
+            />
+            // <div className="todo-item" key={item._id}>
+            //   <>
+            //     {hasChange ? (
+            //       <>
+            //         <input value={newValue} onChange={handleList}></input>
+            //         <input type="date" min={today}></input>
+            //         <button onClick={handleInsertList}>수정완료</button>
+            //       </>
+            //     ) : (
+            //       <>
+            //         <span className="todo-name">{item.name}</span>
+            //         <span className="due-date">{item.dueDate}</span>
+            //         <span className="status">{item.status}</span>
+            //       </>
+            //     )}
+            //     <button
+            //       className="delete"
+            //       value={item._id}
+            //       onClick={handleDelete}
+            //     >
+            //       삭제
+            //     </button>
+            //     <button
+            //       className="done"
+            //       value={item._id}
+            //       onClick={handleUpdate}
+            //     >
+            //       완료
+            //     </button>
+            //     <button className="change-todo" onClick={handleTodo}>
+            //       수정
+            //     </button>
+            //   </>
+            // </div>
           ))}
         </ListItem>
       </Container>
