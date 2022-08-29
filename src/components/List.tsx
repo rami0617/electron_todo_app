@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import TodoItem from "./TodoItem";
+import TodoHandler from "./TodoHandler";
+import TodoSearch from "./TodoSearch";
 
 export default function List() {
   const today = format(new Date(), "yyyy-MM-dd");
@@ -30,6 +32,7 @@ export default function List() {
   const handleInsertList = async () => {
     if (!newValue) {
       alert("할 일을 입력해주세요");
+
       return;
     }
 
@@ -59,19 +62,19 @@ export default function List() {
         <Link to="/">🏠</Link>
         <header className="header">TODO LIST⏳</header>
         <Registration>
-          <span>할일 등록하기</span>
-          <input className="todo" value={newValue} onChange={handleList} />
-          <input
-            className="date"
-            type="date"
-            min={today}
-            onChange={handleDate}
+          <TodoHandler
+            newValue={newValue}
+            handleList={handleList}
+            today={today}
+            handleDate={handleDate}
+            handleInsertList={handleInsertList}
           />
-          <button onClick={handleInsertList}>등록</button>
         </Registration>
         <SearchItem>
-          <input className="keyword" onChange={handleKeyword} />
-          <button onClick={handleSearch}>검색</button>
+          <TodoSearch
+            handleKeyword={handleKeyword}
+            handleSearch={handleSearch}
+          />
         </SearchItem>
         <ListItem>
           {list.map((item) => (

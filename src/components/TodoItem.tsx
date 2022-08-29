@@ -32,7 +32,7 @@ export default function TodoItem({ item, handleList, today }: TodoItemType) {
       return;
     }
 
-    setHasChange((prev) => !prev);
+    setHasChange((state) => !state);
 
     const result = await api.patch("/item", {
       id: item._id,
