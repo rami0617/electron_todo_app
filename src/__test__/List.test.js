@@ -1,4 +1,3 @@
-import React from "react";
 import List from "../components/List";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";

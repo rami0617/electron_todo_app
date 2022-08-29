@@ -1,4 +1,3 @@
-import React from "react";
 import Enterance from "../components/Enterance";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
