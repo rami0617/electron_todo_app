@@ -17,6 +17,7 @@ export default function TodoItem({ item, handleList, today }) {
   const updateTodoItem = async () => {
     if (!newTodoItem) {
       alert("할 일을 입력해주세요");
+
       return;
     }
 
@@ -50,8 +51,8 @@ export default function TodoItem({ item, handleList, today }) {
   };
 
   return (
-    <>
-      <div className="todo-item" key={item._id}>
+    <div key={item._id}>
+      <div className="todo-item">
         {hasChange ? (
           <>
             <input value={newTodoItem} onChange={handleListItem} />
@@ -75,6 +76,6 @@ export default function TodoItem({ item, handleList, today }) {
           수정
         </button>
       </div>
-    </>
+    </div>
   );
 }

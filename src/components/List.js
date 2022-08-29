@@ -16,7 +16,6 @@ export default function List() {
   useEffect(() => {
     fetchData();
   }, []);
-  console.log(list);
 
   const fetchData = async () => {
     const result = await api.get("/");
