@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import format from "date-fns/format";
 import api from "../service/api";
 
-export default function TodoItem({ item, handleList }) {
-  const today = format(new Date(), "yyyy-MM-dd");
-
+export default function TodoItem({ item, handleList, today }) {
   const [newTodoItem, setNewTodoItem] = useState("");
   const [newDate, setNewDate] = useState(item.dueDate);
   const [hasChange, setHasChange] = useState(false);
@@ -23,7 +20,7 @@ export default function TodoItem({ item, handleList }) {
       return;
     }
 
-    setHasChange(false);
+    setHasChange((prev) => !prev);
 
     const result = await api.patch("/item", {
       id: item._id,
@@ -49,7 +46,7 @@ export default function TodoItem({ item, handleList }) {
   };
 
   const handleTodo = () => {
-    setHasChange((prev) => !prev);
+    setHasChange((state) => !state);
   };
 
   return (

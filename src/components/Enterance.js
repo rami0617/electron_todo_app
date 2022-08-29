@@ -20,7 +20,6 @@ const Home = styled.div`
 `;
 
 const Enter = styled.div`
-  background-color: aliceblue;
   padding: 10vh;
   border-radius: 2vh;
   text-decoration: none;

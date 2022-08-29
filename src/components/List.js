@@ -16,6 +16,7 @@ export default function List() {
   useEffect(() => {
     fetchData();
   }, []);
+  console.log(list);
 
   const fetchData = async () => {
     const result = await api.get("/");
@@ -75,47 +76,7 @@ export default function List() {
         </SearchItem>
         <ListItem>
           {list.map((item) => (
-            <TodoItem
-              item={item}
-              handleList={setList}
-              handleInsertList={handleInsertList}
-              newValue={newValue}
-              handleNewValue={setNewValue}
-            />
-            // <div className="todo-item" key={item._id}>
-            //   <>
-            //     {hasChange ? (
-            //       <>
-            //         <input value={newValue} onChange={handleList}></input>
-            //         <input type="date" min={today}></input>
-            //         <button onClick={handleInsertList}>수정완료</button>
-            //       </>
-            //     ) : (
-            //       <>
-            //         <span className="todo-name">{item.name}</span>
-            //         <span className="due-date">{item.dueDate}</span>
-            //         <span className="status">{item.status}</span>
-            //       </>
-            //     )}
-            //     <button
-            //       className="delete"
-            //       value={item._id}
-            //       onClick={handleDelete}
-            //     >
-            //       삭제
-            //     </button>
-            //     <button
-            //       className="done"
-            //       value={item._id}
-            //       onClick={handleUpdate}
-            //     >
-            //       완료
-            //     </button>
-            //     <button className="change-todo" onClick={handleTodo}>
-            //       수정
-            //     </button>
-            //   </>
-            // </div>
+            <TodoItem item={item} handleList={setList} today={today} />
           ))}
         </ListItem>
       </Container>
