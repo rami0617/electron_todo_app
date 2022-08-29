@@ -11,6 +11,7 @@ export default function List() {
   const [newValue, setNewValue] = useState("");
   const [date, setDate] = useState(null);
   const [keyword, setKeyword] = useState(null);
+  const [hasChange, setHasChange] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -66,13 +67,17 @@ export default function List() {
     setKeyword(evnet.target.value);
   };
 
+  const handleTodo = () => {
+    setHasChange((prev) => !prev);
+  };
+
   return (
     <>
       <Container>
-        <Link to="/">앞으로</Link>
+        <Link to="/">🏠</Link>
         <header className="header">TODO LIST⏳</header>
         <Registration>
-          <div>할일 등록하기</div>
+          <span>할일 등록하기</span>
           <input className="todo" value={newValue} onChange={handleList} />
           <input
             className="date"
@@ -86,22 +91,34 @@ export default function List() {
           <input className="keyword" onChange={handleKeyword} />
           <button onClick={handleSearch}>검색</button>
         </SearchItem>
-        <ListContainer>
-          <div>할일</div>
-          <div>끝나는 날짜</div>
-          <div>상태</div>
-        </ListContainer>
         <ListItem>
           {list.map((item) => (
             <div className="todo-item" key={item._id}>
-              <span className="todo-name">{item.name}</span>
-              <span className="due-date">{item.dueDate}</span>
-              <span className="status">{item.status}</span>
-              <button value={item._id} onClick={handleDelete}>
+              {!hasChange ? (
+                <>
+                  <span className="todo-name">{item.name}</span>
+                  <span className="due-date">{item.dueDate}</span>
+                  <span className="status">{item.status}</span>
+                </>
+              ) : (
+                <>
+                  <input></input>
+                  <input type="date" min={today}></input>
+                  <button>수정완료</button>
+                </>
+              )}
+              <button
+                className="delete"
+                value={item._id}
+                onClick={handleDelete}
+              >
                 삭제
               </button>
-              <button value={item._id} onClick={handleUpdate}>
+              <button className="done" value={item._id} onClick={handleUpdate}>
                 완료
+              </button>
+              <button className="change-todo" onClick={handleTodo}>
+                수정
               </button>
             </div>
           ))}
@@ -123,35 +140,31 @@ const Container = styled.div`
 const Registration = styled.div`
   text-align: center;
 
-  .todo {
-    margin: 3vh;
-  }
-
+  .todo,
   .date {
     margin: 3vh;
   }
 `;
 
-const ListContainer = styled.div`
-  background-color: beige;
-  display: flex;
-  justify-content: center;
-
-  .due-date {
-    background-color: aliceblue;
-  }
-`;
-
 const ListItem = styled.div`
-  background-color: aliceblue;
-  text-align: center;
+  margin-top: 3vh;
+  text-align: -webkit-center;
 
   .todo-item {
     width: 60vh;
     padding: 2vh;
-    border: solid 0.2px;
+    border: solid 0.7px;
     border-radius: 1vh;
     margin-bottom: 1vh;
+    background-color: rgb(252, 247, 215);
+  }
+
+  .todo-name,
+  .due-date,
+  .status,
+  .delete,
+  .done {
+    margin-right: 1vh;
   }
 `;
 
