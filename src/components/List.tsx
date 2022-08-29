@@ -10,8 +10,8 @@ export default function List() {
 
   const [list, setList] = useState([]);
   const [newValue, setNewValue] = useState("");
-  const [date, setDate] = useState(null);
-  const [keyword, setKeyword] = useState(null);
+  const [date, setDate] = useState("");
+  const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -23,7 +23,7 @@ export default function List() {
     setList(result.data.result);
   };
 
-  const handleList = (event) => {
+  const handleList = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewValue(event.target.value);
   };
 
@@ -39,7 +39,7 @@ export default function List() {
     setNewValue("");
   };
 
-  const handleDate = (event) => {
+  const handleDate = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDate(event.target.value);
   };
 
@@ -49,7 +49,7 @@ export default function List() {
     setList(result.data.result);
   };
 
-  const handleKeyword = (evnet) => {
+  const handleKeyword = (evnet: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(evnet.target.value);
   };
 

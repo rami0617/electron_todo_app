@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, Dispatch, SetStateAction } from "react";
 import api from "../service/api";
 
-export default function TodoItem({ item, handleList, today }) {
+type TodoItemType = {
+  item: {
+    _id: string;
+    name: string;
+    dueDate: string;
+    status: string;
+  };
+  handleList: Dispatch<SetStateAction<never[]>>;
+  today: string;
+};
+
+export default function TodoItem({ item, handleList, today }: TodoItemType) {
   const [newTodoItem, setNewTodoItem] = useState("");
   const [newDate, setNewDate] = useState(item.dueDate);
   const [hasChange, setHasChange] = useState(false);
 
-  const handleListItem = (event) => {
+  const handleListItem = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewTodoItem(event.target.value);
   };
 
-  const handleNewDate = (event) => {
+  const handleNewDate = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewDate(event.target.value);
   };
 
@@ -32,16 +43,16 @@ export default function TodoItem({ item, handleList, today }) {
     handleList(result.data.result);
   };
 
-  const handleDelete = async (event) => {
+  const handleDelete = async () => {
     const result = await api.delete("/", {
-      headers: { id: event.target.value },
+      headers: { id: item._id },
     });
 
     handleList(result.data.result);
   };
 
-  const handleUpdate = async (event) => {
-    const result = await api.patch("/", { id: event.target.value });
+  const handleUpdate = async () => {
+    const result = await api.patch("/", { id: item._id });
 
     handleList(result.data.result);
   };
