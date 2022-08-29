@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../service/api";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function List() {
   const [list, setList] = useState([]);
@@ -59,6 +60,7 @@ export default function List() {
 
   return (
     <>
+      <Link to="/">앞으로</Link>
       <header>TODOLIST</header>
       <input value={newValue} onChange={handleList} />
       <input type="date" onChange={handleDate} />
