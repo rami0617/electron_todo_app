@@ -8,14 +8,14 @@ type TodoItemType = {
     dueDate: string;
     status: string;
   };
-  handleList: Dispatch<SetStateAction<never[]>>;
   today: string;
+  handleList: Dispatch<SetStateAction<never[]>>;
 };
 
 export default function TodoItem({
   todoItem,
-  handleList,
   today,
+  handleList,
 }: TodoItemType) {
   const [newTodoItem, setNewTodoItem] = useState(todoItem.name);
   const [newDate, setNewDate] = useState(todoItem.dueDate);

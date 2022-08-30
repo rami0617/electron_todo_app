@@ -93,10 +93,10 @@ export default function List() {
 
 const Container = styled.div`
   .header {
+    padding-bottom: 2vh;
     text-align: center;
     font-weight: 500;
     font-size: 5vh;
-    padding-bottom: 2vh;
   }
 `;
 

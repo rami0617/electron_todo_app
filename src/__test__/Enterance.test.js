@@ -15,6 +15,7 @@ describe("Enterance unit test", () => {
 
   it("1.🚪 이모티콘이 화면에 나타나고 이모티콘을 누르면 이동한다.", () => {
     const button = screen.getByText("🚪");
+
     userEvent.click(button);
 
     expect(screen.getByText("TODO LIST⏳")).toBeInTheDocument();

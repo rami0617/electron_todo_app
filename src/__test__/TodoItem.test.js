@@ -7,7 +7,7 @@ describe("TodoItem unit test", () => {
   const mock = [
     {
       _id: "6309f9a438146f221190e990",
-      name: "we",
+      name: "밥 먹기",
       dueDate: "2022-09-01",
       status: "todo",
     },
