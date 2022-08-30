@@ -1,70 +1,105 @@
-# Getting Started with Create React App
+## 디어라운드 과제
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br>
 
-## Available Scripts
+안녕하십니까. 프론트엔드 개발자 직무에 지원한 최아람입니다.
 
-In the project directory, you can run:
+이번 기술과제를 할 수 있게 기회를 주시고 저의 과제를 평가해주셔서 감사합니다. 🙇‍♂️
 
-### `npm start`
+<br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 📚  목록
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+- 🔑 [프로젝트 설치 및 실행](#프로젝트-설치-및-실행)
+- 📝 [과제 요구사항](#과제-요구사항)
+- 🗒 [요구 사항 중 구현 내용](#요구-사항-중-구현-내용)
+- 🔥 [새롭게 시도한 점](#새롭게-시도한-점)
+- 💫 [과제를 하면서 배운점과 아쉬운점](#과제를-하면서-배운점과-아쉬운점)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br>
 
-### `npm run build`
+### 🔑 프로젝트 설치 및 실행
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. 프로젝트를 다운 받은 후, server의 경우 .env파일을 만들어야 합니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```jsx
+MONGO_URI=<MONOGO_URI>
+```
 
-### `npm run eject`
+2. 프로젝트 폴더 내에서 명령어를 실행합니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```jsx
+npm install
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 📝 과제 요구사항
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+- [✅] 할일, 상태(미완료, 완료, 취소), due date 정보 나타내기
+- [✅] todolist의 작성, 삭제 상태변화가 가능하게 하기
+- [✅] todolist정보를 db에 저장
+- [✅] 해당 todolist에 대해 제목으로 검색(프론트에서 검색 아니고 서버에서 가지고 검색해서 오기)
+- [ ] 서버에서 todolist를 pdf로 변환하여 프린터로 출력할 수 있게 하기
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 🗒 요구 사항 중 구현 내용
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- [✅] 할일, 상태(미완료, 완료, 취소), due date 정보 나타내기
+- [✅] todolist의 작성, 삭제 상태변화가 가능하게 하기
+  => todo list의 기본정보와 CRUD 기능을 구현하였습니다.
 
-### Analyzing the Bundle Size
+- [✅] todolist정보를 db에 저장
+  => tddo list의 정보를 NoSQL인 MongoDB를 활용하여 정보를 저장하였습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- [✅] 해당 todolist에 대해 제목으로 검색(프론트에서 검색 아니고 서버에서 가지고 검색해서 오기)
+  => server에서 정규표현식을 사용하여 한 음절이상 같을 경우 찾을 수 있도록 하였습니다.
 
-### Making a Progressive Web App
+- [ ] 서버에서 todolist를 pdf로 변환하여 프린터로 출력할 수 있게 하기
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<br>
 
-### Advanced Configuration
+### 🔥 새롭게 시도한 점
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+1. 일렉트론 사용
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+   일렉트론을 공부해보고 싶다는 생각은 하고는 있었지만 여러 여건상 하지 못했었는데, 과제를 통해 공부할 수 있게 되었습니다.
+   electron이 react, typescript와 호환이 잘되며 러닝커브가 높지 않아 쉽게 배울 수 있었습니다.
+   일렉트론을 사용함으로서 ux에 대한 생각도 조금은 다르게 해야된다는 것을 알 수 있었습니다.
 
-### `npm run build` fails to minify
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. 초기단계부터 반응형으로 제작
+
+   이전까지도 반응형으로 css를 만든 적이 있지만 대부분 리팩토링 단계에서 이루어졌습니다.
+   이번 과제를 하면서 초기설계단계부터 반응형으로 제작을 시작했고, height에 따라 달라지는 vh를 활용하여 만들어보았습니다.
+
+<br>
+
+### 💫 과제를 하면서 배운점과 아쉬운점
+
+---
+
+1. 일렉트론에 대한 이해
+
+   자주 사용하는 슬랙이나 비쥬얼스튜디오가 일렉트론으로 만들어진 만큼, 일렉트론에 대한 호기심은 있었지만 시도해볼 기회가 없었는데 이번 기회에 일렉트론에 대해 전반적으로 이해할 수 있었습니다. 앞으로 프로젝트를 해볼 기회가 있다면 일렉트론으로도 구현해보고 싶다는 생각이 들었습니다.
+
+<br>
+
+2. server에서 todolist정보 pdf로 변환
+
+   pdfkit를 이용하여 pdf를 만들 수 있다는 것은 알았지만 이를 구현하는데 있어서 어려움이 있었습니다. 레퍼런스들도 참고했지만, 페이지에 todo정보들을 하나하나 넣고 그린다고 해도 이후에 어떻게 export해야하는지에 대해 구체적인 방안이 떠오르지 않아 해결하지 못했습니다.
+
+<br>
