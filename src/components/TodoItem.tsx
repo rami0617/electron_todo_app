@@ -2,7 +2,7 @@ import React, { useState, Dispatch, SetStateAction } from "react";
 import api from "../service/api";
 
 type TodoItemType = {
-  item: {
+  todoItem: {
     _id: string;
     name: string;
     dueDate: string;
@@ -12,9 +12,13 @@ type TodoItemType = {
   today: string;
 };
 
-export default function TodoItem({ item, handleList, today }: TodoItemType) {
-  const [newTodoItem, setNewTodoItem] = useState("");
-  const [newDate, setNewDate] = useState(item.dueDate);
+export default function TodoItem({
+  todoItem,
+  handleList,
+  today,
+}: TodoItemType) {
+  const [newTodoItem, setNewTodoItem] = useState(todoItem.name);
+  const [newDate, setNewDate] = useState(todoItem.dueDate);
   const [hasChange, setHasChange] = useState(false);
 
   const handleListItem = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,8 +38,8 @@ export default function TodoItem({ item, handleList, today }: TodoItemType) {
 
     setHasChange((state) => !state);
 
-    const result = await api.patch("/item", {
-      id: item._id,
+    const result = await api.patch("/list/item", {
+      id: todoItem._id,
       item: newTodoItem,
       date: newDate,
     });
@@ -44,15 +48,15 @@ export default function TodoItem({ item, handleList, today }: TodoItemType) {
   };
 
   const handleDelete = async () => {
-    const result = await api.delete("/", {
-      headers: { id: item._id },
+    const result = await api.delete("/list", {
+      headers: { id: todoItem._id },
     });
 
     handleList(result.data.result);
   };
 
   const handleUpdate = async () => {
-    const result = await api.patch("/", { id: item._id });
+    const result = await api.patch("/list", { id: todoItem._id });
 
     handleList(result.data.result);
   };
@@ -62,31 +66,29 @@ export default function TodoItem({ item, handleList, today }: TodoItemType) {
   };
 
   return (
-    <div key={item._id}>
-      <div className="todo-item">
-        {hasChange ? (
-          <>
-            <input value={newTodoItem} onChange={handleListItem} />
-            <input type="date" min={today} onChange={handleNewDate} />
-            <button onClick={updateTodoItem}>수정완료</button>
-          </>
-        ) : (
-          <>
-            <span className="todo-name">{item.name}</span>
-            <span className="due-date">{item.dueDate}</span>
-            <span className="status">{item.status}</span>
-          </>
-        )}
-        <button className="delete" value={item._id} onClick={handleDelete}>
-          삭제
-        </button>
-        <button className="done" value={item._id} onClick={handleUpdate}>
-          완료
-        </button>
-        <button className="change-todo" onClick={handleTodo}>
-          수정
-        </button>
-      </div>
+    <div className="todo-item">
+      {hasChange ? (
+        <>
+          <input value={newTodoItem} onChange={handleListItem} />
+          <input type="date" min={today} onChange={handleNewDate} />
+          <button onClick={updateTodoItem}>수정완료</button>
+        </>
+      ) : (
+        <>
+          <span className="todo-name">{todoItem.name}</span>
+          <span className="due-date">{todoItem.dueDate}</span>
+          <span className="status">{todoItem.status}</span>
+        </>
+      )}
+      <button className="delete" value={todoItem._id} onClick={handleDelete}>
+        삭제
+      </button>
+      <button className="done" value={todoItem._id} onClick={handleUpdate}>
+        완료
+      </button>
+      <button className="change-todo" onClick={handleTodo}>
+        수정
+      </button>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React from "react";
 
 type TodoHandlerType = {
-  newValue: string;
+  newTodo: string;
   today: string;
   handleDate: React.ChangeEventHandler<HTMLInputElement>;
   handleInsertList: React.MouseEventHandler<HTMLButtonElement>;
@@ -9,7 +9,7 @@ type TodoHandlerType = {
 };
 
 export default function TodoHandler({
-  newValue,
+  newTodo,
   today,
   handleList,
   handleDate,
@@ -18,7 +18,7 @@ export default function TodoHandler({
   return (
     <>
       <span>할일 등록하기</span>
-      <input className="todo" value={newValue} onChange={handleList} />
+      <input className="todo" value={newTodo} onChange={handleList} />
       <input className="date" type="date" min={today} onChange={handleDate} />
       <button onClick={handleInsertList}>등록</button>
     </>

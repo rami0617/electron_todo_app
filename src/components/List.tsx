@@ -10,8 +10,8 @@ import TodoSearch from "./TodoSearch";
 export default function List() {
   const today = format(new Date(), "yyyy-MM-dd");
 
-  const [list, setList] = useState([]);
-  const [newValue, setNewValue] = useState("");
+  const [todoList, setTodoList] = useState([]);
+  const [newTodo, setNewTodo] = useState("");
   const [date, setDate] = useState("");
   const [keyword, setKeyword] = useState("");
 
@@ -20,26 +20,26 @@ export default function List() {
   }, []);
 
   const fetchData = async () => {
-    const result = await api.get("/");
+    const result = await api.get("/list");
 
-    setList(result.data.result);
+    setTodoList(result.data.result);
   };
 
   const handleList = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewValue(event.target.value);
+    setNewTodo(event.target.value);
   };
 
   const handleInsertList = async () => {
-    if (!newValue) {
+    if (!newTodo) {
       alert("할 일을 입력해주세요");
 
       return;
     }
 
-    const result = await api.post("/", { name: newValue, date: date });
+    const result = await api.post("/list", { name: newTodo, date: date });
 
-    setList((prev) => prev.concat(result.data.result));
-    setNewValue("");
+    setTodoList((prev) => prev.concat(result.data.result));
+    setNewTodo("");
   };
 
   const handleDate = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,9 +47,9 @@ export default function List() {
   };
 
   const handleSearch = async () => {
-    const result = await api.post("/search", { keyword });
+    const result = await api.post("/list/search", { keyword });
 
-    setList(result.data.result);
+    setTodoList(result.data.result);
   };
 
   const handleKeyword = (evnet: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,9 +63,9 @@ export default function List() {
         <header className="header">TODO LIST⏳</header>
         <Registration>
           <TodoHandler
-            newValue={newValue}
-            handleList={handleList}
+            newTodo={newTodo}
             today={today}
+            handleList={handleList}
             handleDate={handleDate}
             handleInsertList={handleInsertList}
           />
@@ -77,8 +77,13 @@ export default function List() {
           />
         </SearchItem>
         <ListItem>
-          {list.map((item) => (
-            <TodoItem item={item} handleList={setList} today={today} />
+          {todoList?.map((todoItem: any) => (
+            <TodoItem
+              todoItem={todoItem}
+              handleList={setTodoList}
+              today={today}
+              key={todoItem?._id}
+            />
           ))}
         </ListItem>
       </Container>
